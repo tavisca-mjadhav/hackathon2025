@@ -1,0 +1,661 @@
+2025-06-12 11:42:22.318 +05:30 [INF] Starting up the Payment API
+2025-06-12 11:42:22.692 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 11:42:22.697 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 11:42:22.809 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 11:42:22.811 +05:30 [INF] Hosting environment: Development
+2025-06-12 11:42:22.812 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 11:42:26.960 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger - null null
+2025-06-12 11:42:27.072 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger - 301 0 null 117.6293ms
+2025-06-12 11:42:27.077 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 11:42:27.157 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 80.8046ms
+2025-06-12 11:42:27.171 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/swagger-ui.css - null null
+2025-06-12 11:42:27.172 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 11:42:27.172 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 11:42:27.172 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/swagger-ui-standalone-preset.js - null null
+2025-06-12 11:42:27.171 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/swagger-ui-bundle.js - null null
+2025-06-12 11:42:27.217 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 45.0246ms
+2025-06-12 11:42:27.248 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-06-12 11:42:27.248 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-06-12 11:42:27.250 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 78.6832ms
+2025-06-12 11:42:27.252 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/swagger-ui.css - 200 152034 text/css 80.9547ms
+2025-06-12 11:42:27.267 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-06-12 11:42:27.271 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/swagger-ui-bundle.js - 200 1456926 text/javascript 99.9498ms
+2025-06-12 11:42:27.459 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 286.7276ms
+2025-06-12 11:42:27.513 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 11:42:27.530 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.486ms
+2025-06-12 11:42:27.537 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/favicon-32x32.png - null null
+2025-06-12 11:42:27.540 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-06-12 11:42:27.542 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/favicon-32x32.png - 200 628 image/png 5.4574ms
+2025-06-12 11:46:19.810 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 11:46:19.824 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 11:46:19.871 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 11:46:29.131 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Payment'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-06-12 11:46:45.758 +05:30 [ERR] An error occurred using the connection to database 'PaymentDb' on server 'your-sql-server'.
+2025-06-12 11:46:45.865 +05:30 [ERR] An exception occurred in the database while saving changes for context type 'PaymentApi.Repositories.PaymentDbContext'.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+ ---> System.ComponentModel.Win32Exception (53): The network path was not found.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+ ---> System.ComponentModel.Win32Exception (53): The network path was not found.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+2025-06-12 11:46:46.393 +05:30 [INF] Executed action PaymentApi.Controllers.PaymentController.Create (Payment-Api) in 26512.6744ms
+2025-06-12 11:46:46.401 +05:30 [INF] Executed endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 11:46:46.410 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+Microsoft.Data.SqlClient.SqlException (0x80131904): A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server)
+ ---> System.ComponentModel.Win32Exception (53): The network path was not found.
+   at Microsoft.Data.SqlClient.SqlInternalConnection.OnError(SqlException exception, Boolean breakConnection, Action`1 wrapCloseInAction)
+   at Microsoft.Data.SqlClient.TdsParser.ThrowExceptionAndWarning(TdsParserStateObject stateObj, Boolean callerHasConnectionLock, Boolean asyncClose)
+   at Microsoft.Data.SqlClient.TdsParser.Connect(ServerInfo serverInfo, SqlInternalConnectionTds connHandler, Boolean ignoreSniOpenTimeout, Int64 timerExpire, SqlConnectionString connectionOptions, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.AttemptOneLogin(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean ignoreSniOpenTimeout, TimeoutTimer timeout, Boolean withFailover)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.LoginNoFailover(ServerInfo serverInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString connectionOptions, SqlCredential credential, TimeoutTimer timeout)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds.OpenLoginEnlist(TimeoutTimer timeout, SqlConnectionString connectionOptions, SqlCredential credential, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance)
+   at Microsoft.Data.SqlClient.SqlInternalConnectionTds..ctor(DbConnectionPoolIdentity identity, SqlConnectionString connectionOptions, SqlCredential credential, Object providerInfo, String newPassword, SecureString newSecurePassword, Boolean redirectedUserInstance, SqlConnectionString userConnectionOptions, SessionData reconnectSessionData, Boolean applyTransientFaultHandling, String accessToken, DbConnectionPool pool)
+   at Microsoft.Data.SqlClient.SqlConnectionFactory.CreateConnection(DbConnectionOptions options, DbConnectionPoolKey poolKey, Object poolGroupProviderInfo, DbConnectionPool pool, DbConnection owningConnection, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionFactory.CreatePooledConnection(DbConnectionPool pool, DbConnection owningObject, DbConnectionOptions options, DbConnectionPoolKey poolKey, DbConnectionOptions userOptions)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.CreateObject(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.UserCreateRequest(DbConnection owningObject, DbConnectionOptions userOptions, DbConnectionInternal oldConnection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.TryGetConnection(DbConnection owningObject, UInt32 waitForMultipleObjectsTimeout, Boolean allowCreate, Boolean onlyOneCheckConnection, DbConnectionOptions userOptions, DbConnectionInternal& connection)
+   at Microsoft.Data.ProviderBase.DbConnectionPool.WaitForPendingOpen()
+--- End of stack trace from previous location ---
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Update.Internal.BatchExecutor.ExecuteAsync(IEnumerable`1 commandBatches, IRelationalConnection connection, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(IList`1 entriesToSave, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.ChangeTracking.Internal.StateManager.SaveChangesAsync(StateManager stateManager, Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync(Boolean acceptAllChangesOnSuccess, CancellationToken cancellationToken)
+   at PaymentApi.Repositories.PaymentRepository.AddAsync(Payment payment) in C:\TaviscaSolutions\POC\Payment-Api\Payment-Api\Repositories\PaymentRepository.cs:line 29
+   at PaymentApi.Services.PaymentService.CreatePaymentAsync(Payment payment) in C:\TaviscaSolutions\POC\Payment-Api\Payment-Api\Services\PaymentService.cs:line 30
+   at PaymentApi.Controllers.PaymentController.Create(Payment payment) in C:\TaviscaSolutions\POC\Payment-Api\Payment-Api\Controllers\PaymentController.cs:line 41
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+ClientConnectionId:00000000-0000-0000-0000-000000000000
+Error Number:53,State:0,Class:20
+2025-06-12 11:46:46.777 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7197/api/payment - 500 null text/plain; charset=utf-8 26967.5158ms
+2025-06-12 11:49:41.745 +05:30 [INF] Starting up the Payment API
+2025-06-12 11:49:42.106 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 11:49:42.111 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 11:49:42.206 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 11:49:42.208 +05:30 [INF] Hosting environment: Development
+2025-06-12 11:49:42.208 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 11:49:44.368 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 11:49:44.557 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 195.6914ms
+2025-06-12 11:49:44.598 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 11:49:44.601 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 11:49:44.622 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 23.7021ms
+2025-06-12 11:49:44.685 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 84.2666ms
+2025-06-12 11:49:44.832 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 11:49:44.852 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.6833ms
+2025-06-12 11:49:50.017 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 11:49:50.033 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 11:49:50.081 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 11:50:40.929 +05:30 [INF] Payment Create call
+2025-06-12 11:53:44.879 +05:30 [INF] Starting up the Payment API
+2025-06-12 11:53:47.609 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 11:53:47.613 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 11:53:47.770 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 11:53:47.772 +05:30 [INF] Hosting environment: Development
+2025-06-12 11:53:47.773 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 11:53:49.681 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 11:53:49.858 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 188.1864ms
+2025-06-12 11:53:49.927 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 11:53:49.927 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 11:53:49.950 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 23.1903ms
+2025-06-12 11:53:49.990 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 63.9713ms
+2025-06-12 11:53:50.023 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 11:53:50.057 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 34.6427ms
+2025-06-12 11:53:57.452 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 11:53:57.465 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 11:53:57.518 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 11:54:02.827 +05:30 [INF] Payment Create call
+2025-06-12 12:02:21.573 +05:30 [INF] Starting up the Payment API
+2025-06-12 12:02:21.880 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:02:21.885 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:02:21.949 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:02:21.953 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:02:21.957 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:02:24.013 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:02:24.196 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 193.0878ms
+2025-06-12 12:02:24.330 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:02:24.331 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:02:24.338 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 8.478ms
+2025-06-12 12:02:24.384 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 53.6254ms
+2025-06-12 12:02:24.424 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:02:24.441 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.9711ms
+2025-06-12 12:02:30.297 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:02:30.307 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:02:30.348 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:02:30.570 +05:30 [INF] Found AWS options in IConfiguration
+2025-06-12 12:02:30.584 +05:30 [INF] Found credentials using the AWS SDK's default credential search
+2025-06-12 12:02:30.601 +05:30 [INF] Executed action PaymentApi.Controllers.PaymentController.Create (Payment-Api) in 244.82ms
+2025-06-12 12:02:30.605 +05:30 [INF] Executed endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:02:30.610 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'Void Amazon.Runtime.ClientConfig.set_ConnectTimeout(System.Nullable`1<System.TimeSpan>)'.
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateConfig(AWSOptions options)
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateServiceClient(ILogger logger, AWSOptions options)
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateServiceClient(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-12 12:02:30.680 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7197/api/payment - 500 null text/plain; charset=utf-8 383.1061ms
+2025-06-12 12:03:00.370 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:03:00.377 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:03:00.381 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:03:00.398 +05:30 [INF] Found AWS options in IConfiguration
+2025-06-12 12:03:00.400 +05:30 [INF] Found credentials using the AWS SDK's default credential search
+2025-06-12 12:03:00.406 +05:30 [INF] Executed action PaymentApi.Controllers.PaymentController.Create (Payment-Api) in 18.072ms
+2025-06-12 12:03:00.408 +05:30 [INF] Executed endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:03:00.412 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Method not found: 'Void Amazon.Runtime.ClientConfig.set_ConnectTimeout(System.Nullable`1<System.TimeSpan>)'.
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateConfig(AWSOptions options)
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateServiceClient(ILogger logger, AWSOptions options)
+   at Amazon.Extensions.NETCore.Setup.ClientFactory`1.CreateServiceClient(IServiceProvider provider)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitFactory(FactoryCallSite factoryCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.ServiceProviderEngineScope.GetService(Type serviceType)
+   at lambda_method10(Closure, IServiceProvider, Object[])
+   at Microsoft.AspNetCore.Mvc.Controllers.ControllerFactoryProvider.<>c__DisplayClass6_0.<CreateControllerFactory>g__CreateController|0(ControllerContext controllerContext)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-12 12:03:00.426 +05:30 [INF] Request finished HTTP/1.1 POST https://localhost:7197/api/payment - 500 null text/plain; charset=utf-8 55.6342ms
+2025-06-12 12:09:21.329 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:09:21.367 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 38.4044ms
+2025-06-12 12:09:21.374 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:09:21.374 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:09:21.387 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 12.5863ms
+2025-06-12 12:09:21.406 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 32.0617ms
+2025-06-12 12:09:21.449 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:09:21.463 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.4884ms
+2025-06-12 12:11:49.514 +05:30 [INF] Starting up the Payment API
+2025-06-12 12:11:49.802 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:11:49.807 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:11:49.878 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:11:49.880 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:11:49.881 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:11:51.412 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:11:51.617 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 214.6461ms
+2025-06-12 12:11:51.653 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:11:51.653 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:11:51.669 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 15.647ms
+2025-06-12 12:11:51.718 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 65.0856ms
+2025-06-12 12:11:51.756 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:11:51.771 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.6729ms
+2025-06-12 12:11:55.222 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:11:55.236 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:11:55.283 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:12:02.903 +05:30 [INF] create payment call
+2025-06-12 12:15:54.124 +05:30 [INF] Payment API is starting...
+2025-06-12 12:15:54.393 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:15:54.395 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:15:54.466 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:15:54.467 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:15:54.467 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:15:56.537 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:15:56.695 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 170.222ms
+2025-06-12 12:15:56.737 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:15:56.737 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:15:56.744 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 6.8255ms
+2025-06-12 12:15:56.791 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 53.9884ms
+2025-06-12 12:15:56.848 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:15:56.861 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 13.1011ms
+2025-06-12 12:16:04.751 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:16:04.759 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:16:04.796 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:16:11.458 +05:30 [INF] create payment call
+2025-06-12 12:23:32.423 +05:30 [INF] Payment API is starting...
+2025-06-12 12:23:32.723 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:23:32.724 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:23:32.810 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:23:32.811 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:23:32.811 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:23:34.859 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:23:35.066 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 220.3444ms
+2025-06-12 12:23:35.118 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:23:35.120 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:23:35.128 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.503ms
+2025-06-12 12:23:35.176 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.4997ms
+2025-06-12 12:23:35.238 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:23:35.253 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 15.1712ms
+2025-06-12 12:23:38.728 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:23:38.738 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:23:38.777 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:23:47.024 +05:30 [INF] create payment call
+2025-06-12 12:24:19.573 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Payment'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-06-12 12:24:31.192 +05:30 [INF] Payment API is starting...
+2025-06-12 12:24:31.444 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:24:31.445 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:24:31.509 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:24:31.510 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:24:31.510 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:24:33.548 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:24:33.719 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 180.7052ms
+2025-06-12 12:24:33.791 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:24:33.791 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:24:33.800 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 9.1021ms
+2025-06-12 12:24:33.848 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 56.7906ms
+2025-06-12 12:24:33.906 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:24:33.921 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.5935ms
+2025-06-12 12:30:48.233 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-06-12 12:30:48.315 +05:30 [INF] Payment API is starting...
+2025-06-12 12:30:48.323 +05:30 [DBG] Hosting starting
+2025-06-12 12:30:48.349 +05:30 [DBG] Middleware loaded
+2025-06-12 12:30:48.351 +05:30 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16507 B).
+2025-06-12 12:30:48.353 +05:30 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-06-12 12:30:48.453 +05:30 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-06-12 12:30:48.560 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:30:48.560 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:30:48.560 +05:30 [DBG] Loaded hosting startup assembly Payment-Api
+2025-06-12 12:30:48.560 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-06-12 12:30:48.560 +05:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-06-12 12:30:48.560 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-06-12 12:30:48.625 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:30:48.625 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:30:48.625 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:30:48.626 +05:30 [DBG] Hosting started
+2025-06-12 12:30:48.705 +05:30 [DBG] Connection id "0HND9FRE85T5A" accepted.
+2025-06-12 12:30:48.705 +05:30 [DBG] Connection id "0HND9FRE85T5B" accepted.
+2025-06-12 12:30:48.706 +05:30 [DBG] Connection id "0HND9FRE85T5B" started.
+2025-06-12 12:30:48.706 +05:30 [DBG] Connection id "0HND9FRE85T5A" started.
+2025-06-12 12:30:48.714 +05:30 [DBG] Connection id "0HND9FRE85T5A" received FIN.
+2025-06-12 12:30:48.714 +05:30 [DBG] Connection id "0HND9FRE85T5B" received FIN.
+2025-06-12 12:30:48.725 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:30:48.725 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:30:48.754 +05:30 [DBG] Connection id "0HND9FRE85T5B" stopped.
+2025-06-12 12:30:48.754 +05:30 [DBG] Connection id "0HND9FRE85T5A" stopped.
+2025-06-12 12:30:48.758 +05:30 [DBG] Connection id "0HND9FRE85T5B" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:30:48.758 +05:30 [DBG] Connection id "0HND9FRE85T5A" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:30:50.365 +05:30 [DBG] Connection id "0HND9FRE85T5C" accepted.
+2025-06-12 12:30:50.367 +05:30 [DBG] Connection id "0HND9FRE85T5C" started.
+2025-06-12 12:30:50.407 +05:30 [DBG] Connection 0HND9FRE85T5C established using the following protocol: "Tls13"
+2025-06-12 12:30:50.500 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:30:50.541 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-06-12 12:30:50.561 +05:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-06-12 12:30:50.562 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:30:50.620 +05:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2025-06-12 12:30:50.621 +05:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2025-06-12 12:30:50.641 +05:30 [DBG] Response markup was updated to include Browser Link script injection.
+2025-06-12 12:30:50.642 +05:30 [DBG] Response markup was updated to include browser refresh script injection.
+2025-06-12 12:30:50.646 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 156.0746ms
+2025-06-12 12:30:50.677 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:30:50.679 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:30:50.686 +05:30 [DBG] Script injected: /_framework/aspnetcore-browser-refresh.js
+2025-06-12 12:30:50.688 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 10.3853ms
+2025-06-12 12:30:50.741 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 61.3327ms
+2025-06-12 12:30:50.797 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:30:50.797 +05:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-06-12 12:30:50.797 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:30:50.814 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.9457ms
+2025-06-12 12:30:53.705 +05:30 [DBG] Connection id "0HND9FRE85T5C" received FIN.
+2025-06-12 12:30:53.708 +05:30 [DBG] The connection queue processing loop for 0HND9FRE85T5C completed.
+2025-06-12 12:30:53.710 +05:30 [DBG] Connection id "0HND9FRE85T5C" is closed. The last processed stream ID was 7.
+2025-06-12 12:30:53.711 +05:30 [DBG] Connection id "0HND9FRE85T5C" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:30:53.725 +05:30 [DBG] Connection id "0HND9FRE85T5C" stopped.
+2025-06-12 12:30:53.982 +05:30 [DBG] Connection id "0HND9FRE85T5D" received FIN.
+2025-06-12 12:30:53.982 +05:30 [DBG] Connection id "0HND9FRE85T5D" accepted.
+2025-06-12 12:30:53.982 +05:30 [DBG] Connection id "0HND9FRE85T5D" started.
+2025-06-12 12:30:53.983 +05:30 [DBG] Connection id "0HND9FRE85T5E" accepted.
+2025-06-12 12:30:53.983 +05:30 [DBG] Connection id "0HND9FRE85T5E" started.
+2025-06-12 12:30:53.984 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:30:53.984 +05:30 [DBG] Connection id "0HND9FRE85T5D" stopped.
+2025-06-12 12:30:53.984 +05:30 [DBG] Connection id "0HND9FRE85T5D" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:30:53.991 +05:30 [DBG] Connection 0HND9FRE85T5E established using the following protocol: "Tls13"
+2025-06-12 12:30:53.994 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:30:53.996 +05:30 [DBG] 1 candidate(s) found for the request path '/api/payment'
+2025-06-12 12:30:53.999 +05:30 [DBG] Endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)' with route pattern 'api/Payment' is valid for the request path '/api/payment'
+2025-06-12 12:30:53.999 +05:30 [DBG] Request matched endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:30:54.001 +05:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2025-06-12 12:30:54.003 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:30:54.027 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:30:54.028 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-06-12 12:30:54.029 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-06-12 12:30:54.029 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-06-12 12:30:54.029 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-06-12 12:30:54.029 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-06-12 12:30:54.030 +05:30 [DBG] Executing controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:30:54.164 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-06-12 12:30:57.051 +05:30 [DBG] Executed controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:30:57.066 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:30:57.068 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' using the name '' in request data ...
+2025-06-12 12:30:57.070 +05:30 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2025-06-12 12:30:57.085 +05:30 [DBG] Connection id "0HND9FRE85T5E", Request id "0HND9FRE85T5E:00000001": started reading request body.
+2025-06-12 12:30:57.085 +05:30 [DBG] Connection id "0HND9FRE85T5E", Request id "0HND9FRE85T5E:00000001": done reading request body.
+2025-06-12 12:30:57.106 +05:30 [DBG] JSON input formatter succeeded, deserializing to type 'PaymentApi.Models.Payment'
+2025-06-12 12:30:57.107 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:30:57.107 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:30:57.108 +05:30 [DBG] Attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:30:57.121 +05:30 [DBG] Done attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:30:59.593 +05:30 [INF] create payment call
+2025-06-12 12:31:32.769 +05:30 [DBG] create payment call
+2025-06-12 12:32:33.160 +05:30 [DBG] create payment call
+2025-06-12 12:35:14.265 +05:30 [INF] create payment call
+2025-06-12 12:45:49.384 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-06-12 12:45:49.442 +05:30 [INF] Payment API is starting...
+2025-06-12 12:45:49.448 +05:30 [DBG] Hosting starting
+2025-06-12 12:45:49.457 +05:30 [DBG] Middleware loaded
+2025-06-12 12:45:49.458 +05:30 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16507 B).
+2025-06-12 12:45:49.459 +05:30 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-06-12 12:45:49.557 +05:30 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-06-12 12:45:49.708 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:45:49.709 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:45:49.709 +05:30 [DBG] Loaded hosting startup assembly Payment-Api
+2025-06-12 12:45:49.709 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-06-12 12:45:49.709 +05:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-06-12 12:45:49.709 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-06-12 12:45:49.793 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:45:49.793 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:45:49.793 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:45:49.793 +05:30 [DBG] Hosting started
+2025-06-12 12:45:50.142 +05:30 [DBG] Connection id "0HND9G3QSV88P" received FIN.
+2025-06-12 12:45:50.142 +05:30 [DBG] Connection id "0HND9G3QSV88Q" received FIN.
+2025-06-12 12:45:50.150 +05:30 [DBG] Connection id "0HND9G3QSV88Q" accepted.
+2025-06-12 12:45:50.151 +05:30 [DBG] Connection id "0HND9G3QSV88P" accepted.
+2025-06-12 12:45:50.152 +05:30 [DBG] Connection id "0HND9G3QSV88Q" started.
+2025-06-12 12:45:50.152 +05:30 [DBG] Connection id "0HND9G3QSV88P" started.
+2025-06-12 12:45:50.170 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:45:50.170 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:45:50.221 +05:30 [DBG] Connection id "0HND9G3QSV88Q" stopped.
+2025-06-12 12:45:50.221 +05:30 [DBG] Connection id "0HND9G3QSV88P" stopped.
+2025-06-12 12:45:50.226 +05:30 [DBG] Connection id "0HND9G3QSV88Q" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:45:50.226 +05:30 [DBG] Connection id "0HND9G3QSV88P" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:45:52.097 +05:30 [DBG] Connection id "0HND9G3QSV88R" accepted.
+2025-06-12 12:45:52.097 +05:30 [DBG] Connection id "0HND9G3QSV88R" started.
+2025-06-12 12:45:52.155 +05:30 [DBG] Connection 0HND9G3QSV88R established using the following protocol: "Tls13"
+2025-06-12 12:45:52.240 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:45:52.283 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-06-12 12:45:52.296 +05:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-06-12 12:45:52.297 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:45:52.343 +05:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2025-06-12 12:45:52.344 +05:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2025-06-12 12:45:52.363 +05:30 [DBG] Response markup was updated to include Browser Link script injection.
+2025-06-12 12:45:52.363 +05:30 [DBG] Response markup was updated to include browser refresh script injection.
+2025-06-12 12:45:52.367 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 141.7781ms
+2025-06-12 12:45:52.401 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:45:52.402 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:45:52.409 +05:30 [DBG] Script injected: /_framework/aspnetcore-browser-refresh.js
+2025-06-12 12:45:52.410 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 8.7898ms
+2025-06-12 12:45:52.443 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 41.2701ms
+2025-06-12 12:45:52.490 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:45:52.491 +05:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-06-12 12:45:52.491 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:45:52.507 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 16.8883ms
+2025-06-12 12:45:55.534 +05:30 [DBG] Connection id "0HND9G3QSV88R" received FIN.
+2025-06-12 12:45:55.539 +05:30 [DBG] The connection queue processing loop for 0HND9G3QSV88R completed.
+2025-06-12 12:45:55.540 +05:30 [DBG] Connection id "0HND9G3QSV88R" is closed. The last processed stream ID was 7.
+2025-06-12 12:45:55.541 +05:30 [DBG] Connection id "0HND9G3QSV88R" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:45:55.556 +05:30 [DBG] Connection id "0HND9G3QSV88R" stopped.
+2025-06-12 12:45:58.712 +05:30 [DBG] Connection id "0HND9G3QSV88S" received FIN.
+2025-06-12 12:45:58.713 +05:30 [DBG] Connection id "0HND9G3QSV88S" accepted.
+2025-06-12 12:45:58.713 +05:30 [DBG] Connection id "0HND9G3QSV88S" started.
+2025-06-12 12:45:58.714 +05:30 [DBG] Connection id "0HND9G3QSV88T" accepted.
+2025-06-12 12:45:58.714 +05:30 [DBG] Connection id "0HND9G3QSV88T" started.
+2025-06-12 12:45:58.715 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:45:58.717 +05:30 [DBG] Connection id "0HND9G3QSV88S" stopped.
+2025-06-12 12:45:58.717 +05:30 [DBG] Connection id "0HND9G3QSV88S" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:45:58.723 +05:30 [DBG] Connection 0HND9G3QSV88T established using the following protocol: "Tls13"
+2025-06-12 12:45:58.731 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:45:58.736 +05:30 [DBG] 1 candidate(s) found for the request path '/api/payment'
+2025-06-12 12:45:58.741 +05:30 [DBG] Endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)' with route pattern 'api/Payment' is valid for the request path '/api/payment'
+2025-06-12 12:45:58.742 +05:30 [DBG] Request matched endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:45:58.746 +05:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2025-06-12 12:45:58.749 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:45:58.803 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:45:58.805 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-06-12 12:45:58.805 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-06-12 12:45:58.805 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-06-12 12:45:58.805 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-06-12 12:45:58.806 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-06-12 12:45:58.808 +05:30 [DBG] Executing controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:45:58.994 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-06-12 12:46:02.874 +05:30 [DBG] Executed controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:46:02.900 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:46:02.902 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' using the name '' in request data ...
+2025-06-12 12:46:02.904 +05:30 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2025-06-12 12:46:02.920 +05:30 [DBG] Connection id "0HND9G3QSV88T", Request id "0HND9G3QSV88T:00000001": started reading request body.
+2025-06-12 12:46:02.921 +05:30 [DBG] Connection id "0HND9G3QSV88T", Request id "0HND9G3QSV88T:00000001": done reading request body.
+2025-06-12 12:46:02.940 +05:30 [DBG] JSON input formatter succeeded, deserializing to type 'PaymentApi.Models.Payment'
+2025-06-12 12:46:02.941 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:46:02.941 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:46:02.941 +05:30 [DBG] Attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:46:02.952 +05:30 [DBG] Done attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:46:06.597 +05:30 [INF] create payment call
+2025-06-12 12:47:35.247 +05:30 [INF] create payment call
+2025-06-12 12:52:47.344 +05:30 [DBG] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DateTimeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.TryParseModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider","Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexObjectModelBinderProvider"]
+2025-06-12 12:52:47.435 +05:30 [INF] Payment API is starting...
+2025-06-12 12:52:47.440 +05:30 [DBG] Hosting starting
+2025-06-12 12:52:47.450 +05:30 [DBG] Middleware loaded
+2025-06-12 12:52:47.451 +05:30 [DBG] Middleware loaded. Script /_framework/aspnetcore-browser-refresh.js (16507 B).
+2025-06-12 12:52:47.452 +05:30 [DBG] Middleware loaded. Script /_framework/blazor-hotreload.js (799 B).
+2025-06-12 12:52:47.557 +05:30 [DBG] Middleware loaded: DOTNET_MODIFIABLE_ASSEMBLIES=debug, __ASPNETCORE_BROWSER_TOOLS=true
+2025-06-12 12:52:47.650 +05:30 [INF] Now listening on: https://localhost:7197
+2025-06-12 12:52:47.651 +05:30 [INF] Now listening on: http://localhost:5221
+2025-06-12 12:52:47.651 +05:30 [DBG] Loaded hosting startup assembly Payment-Api
+2025-06-12 12:52:47.651 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.ApiEndpointDiscovery
+2025-06-12 12:52:47.651 +05:30 [DBG] Loaded hosting startup assembly Microsoft.AspNetCore.Watch.BrowserRefresh
+2025-06-12 12:52:47.651 +05:30 [DBG] Loaded hosting startup assembly Microsoft.WebTools.BrowserLink.Net
+2025-06-12 12:52:47.740 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:52:47.740 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:52:47.740 +05:30 [INF] Content root path: C:\TaviscaSolutions\POC\Payment-Api\Payment-Api
+2025-06-12 12:52:47.740 +05:30 [DBG] Hosting started
+2025-06-12 12:52:47.789 +05:30 [DBG] Connection id "0HND9G7NBVCPL" accepted.
+2025-06-12 12:52:47.789 +05:30 [DBG] Connection id "0HND9G7NBVCPM" accepted.
+2025-06-12 12:52:47.790 +05:30 [DBG] Connection id "0HND9G7NBVCPM" started.
+2025-06-12 12:52:47.790 +05:30 [DBG] Connection id "0HND9G7NBVCPL" started.
+2025-06-12 12:52:47.801 +05:30 [DBG] Connection id "0HND9G7NBVCPM" received FIN.
+2025-06-12 12:52:47.801 +05:30 [DBG] Connection id "0HND9G7NBVCPL" received FIN.
+2025-06-12 12:52:47.812 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:52:47.812 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:52:47.858 +05:30 [DBG] Connection id "0HND9G7NBVCPL" stopped.
+2025-06-12 12:52:47.858 +05:30 [DBG] Connection id "0HND9G7NBVCPM" stopped.
+2025-06-12 12:52:47.866 +05:30 [DBG] Connection id "0HND9G7NBVCPL" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:52:47.866 +05:30 [DBG] Connection id "0HND9G7NBVCPM" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:52:49.358 +05:30 [DBG] Connection id "0HND9G7NBVCPN" accepted.
+2025-06-12 12:52:49.362 +05:30 [DBG] Connection id "0HND9G7NBVCPN" started.
+2025-06-12 12:52:49.499 +05:30 [DBG] Connection 0HND9G7NBVCPN established using the following protocol: "Tls13"
+2025-06-12 12:52:49.573 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/index.html - null null
+2025-06-12 12:52:49.630 +05:30 [DBG] Wildcard detected, all requests with hosts will be allowed.
+2025-06-12 12:52:49.645 +05:30 [DBG] No candidates found for the request path '/swagger/index.html'
+2025-06-12 12:52:49.646 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:52:49.699 +05:30 [DBG] Response markup is scheduled to include Browser Link script injection.
+2025-06-12 12:52:49.700 +05:30 [DBG] Response markup is scheduled to include browser refresh script injection.
+2025-06-12 12:52:49.717 +05:30 [DBG] Response markup was updated to include Browser Link script injection.
+2025-06-12 12:52:49.718 +05:30 [DBG] Response markup was updated to include browser refresh script injection.
+2025-06-12 12:52:49.722 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/index.html - 200 null text/html;charset=utf-8 158.9492ms
+2025-06-12 12:52:49.770 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_vs/browserLink - null null
+2025-06-12 12:52:49.770 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-12 12:52:49.775 +05:30 [DBG] Script injected: /_framework/aspnetcore-browser-refresh.js
+2025-06-12 12:52:49.776 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_framework/aspnetcore-browser-refresh.js - 200 16507 application/javascript; charset=utf-8 7.053ms
+2025-06-12 12:52:49.825 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/_vs/browserLink - 200 null text/javascript; charset=UTF-8 55.7411ms
+2025-06-12 12:52:49.874 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - null null
+2025-06-12 12:52:49.874 +05:30 [DBG] No candidates found for the request path '/swagger/v1/swagger.json'
+2025-06-12 12:52:49.874 +05:30 [DBG] Request did not match any endpoints
+2025-06-12 12:52:49.888 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7197/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 14.9594ms
+2025-06-12 12:52:52.729 +05:30 [DBG] Connection id "0HND9G7NBVCPO" accepted.
+2025-06-12 12:52:52.729 +05:30 [DBG] Connection id "0HND9G7NBVCPO" received FIN.
+2025-06-12 12:52:52.729 +05:30 [DBG] Connection id "0HND9G7NBVCPO" started.
+2025-06-12 12:52:52.730 +05:30 [DBG] Connection id "0HND9G7NBVCPP" accepted.
+2025-06-12 12:52:52.730 +05:30 [DBG] Connection id "0HND9G7NBVCPP" started.
+2025-06-12 12:52:52.731 +05:30 [DBG] Failed to authenticate HTTPS connection.
+System.IO.IOException: Received an unexpected EOF or 0 bytes from the transport stream.
+   at System.Net.Security.SslStream.ReceiveHandshakeFrameAsync[TIOAdapter](CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ForceAuthenticationAsync[TIOAdapter](Boolean receiveFirst, Byte[] reAuthenticationData, CancellationToken cancellationToken)
+   at System.Net.Security.SslStream.ProcessAuthenticationWithTelemetryAsync(Boolean isAsync, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Https.Internal.HttpsConnectionMiddleware.OnConnectionAsync(ConnectionContext context)
+2025-06-12 12:52:52.732 +05:30 [DBG] Connection id "0HND9G7NBVCPO" stopped.
+2025-06-12 12:52:52.734 +05:30 [DBG] Connection id "0HND9G7NBVCPO" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:52:52.737 +05:30 [DBG] Connection 0HND9G7NBVCPP established using the following protocol: "Tls13"
+2025-06-12 12:52:52.741 +05:30 [INF] Request starting HTTP/1.1 POST https://localhost:7197/api/payment - application/json 385
+2025-06-12 12:52:52.744 +05:30 [DBG] 1 candidate(s) found for the request path '/api/payment'
+2025-06-12 12:52:52.748 +05:30 [DBG] Endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)' with route pattern 'api/Payment' is valid for the request path '/api/payment'
+2025-06-12 12:52:52.749 +05:30 [DBG] Request matched endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:52:52.752 +05:30 [DBG] Static files was skipped as the request already matched an endpoint.
+2025-06-12 12:52:52.755 +05:30 [INF] Executing endpoint 'PaymentApi.Controllers.PaymentController.Create (Payment-Api)'
+2025-06-12 12:52:52.801 +05:30 [INF] Route matched with {action = "Create", controller = "Payment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(PaymentApi.Models.Payment) on controller PaymentApi.Controllers.PaymentController (Payment-Api).
+2025-06-12 12:52:52.803 +05:30 [DBG] Execution plan of authorization filters (in the following order): ["None"]
+2025-06-12 12:52:52.803 +05:30 [DBG] Execution plan of resource filters (in the following order): ["None"]
+2025-06-12 12:52:52.803 +05:30 [DBG] Execution plan of action filters (in the following order): ["Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)","Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2025-06-12 12:52:52.804 +05:30 [DBG] Execution plan of exception filters (in the following order): ["None"]
+2025-06-12 12:52:52.804 +05:30 [DBG] Execution plan of result filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2025-06-12 12:52:52.806 +05:30 [DBG] Executing controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:52:52.844 +05:30 [DBG] Connection id "0HND9G7NBVCPN" received FIN.
+2025-06-12 12:52:52.846 +05:30 [DBG] Connection id "0HND9G7NBVCPN" sending FIN because: "The Socket transport's send loop completed gracefully."
+2025-06-12 12:52:52.858 +05:30 [DBG] Connection id "0HND9G7NBVCPN" is closed. The last processed stream ID was 7.
+2025-06-12 12:52:52.859 +05:30 [DBG] The connection queue processing loop for 0HND9G7NBVCPN completed.
+2025-06-12 12:52:52.862 +05:30 [DBG] Connection id "0HND9G7NBVCPN" stopped.
+2025-06-12 12:52:52.954 +05:30 [DBG] An 'IServiceProvider' was created for internal use by Entity Framework.
+2025-06-12 12:52:55.091 +05:30 [DBG] Executed controller factory for controller PaymentApi.Controllers.PaymentController (Payment-Api)
+2025-06-12 12:52:55.108 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:52:55.110 +05:30 [DBG] Attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment' using the name '' in request data ...
+2025-06-12 12:52:55.112 +05:30 [DBG] Selected input formatter 'Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter' for content type 'application/json'.
+2025-06-12 12:52:55.128 +05:30 [DBG] Connection id "0HND9G7NBVCPP", Request id "0HND9G7NBVCPP:00000001": started reading request body.
+2025-06-12 12:52:55.129 +05:30 [DBG] Connection id "0HND9G7NBVCPP", Request id "0HND9G7NBVCPP:00000001": done reading request body.
+2025-06-12 12:52:55.151 +05:30 [DBG] JSON input formatter succeeded, deserializing to type 'PaymentApi.Models.Payment'
+2025-06-12 12:52:55.152 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:52:55.152 +05:30 [DBG] Done attempting to bind parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:52:55.152 +05:30 [DBG] Attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment' ...
+2025-06-12 12:52:55.164 +05:30 [DBG] Done attempting to validate the bound parameter 'payment' of type 'PaymentApi.Models.Payment'.
+2025-06-12 12:52:57.218 +05:30 [INF] create payment call
+2025-06-12 13:03:42.249 +05:30 [INF] Payment API is starting...
+2025-06-12 13:03:54.531 +05:30 [INF] create payment call
