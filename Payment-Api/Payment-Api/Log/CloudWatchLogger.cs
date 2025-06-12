@@ -48,7 +48,7 @@ namespace PaymentApi.Log
         private async Task LogAsync(string level, string message, string json)
         {
             var logBuilder = new StringBuilder();
-            logBuilder.Append($"CID:{GetCid()}=>{DateTime.UtcNow:o} [level:{level}] [message:{message}] [data:{json}]");
+            logBuilder.Append($"CID:{GetCid()}=> {DateTime.UtcNow:o}[app:name: {"payment_api"}] [level:{level}] [message:{message}] [data:{json}]");
             var logEvent = new InputLogEvent
             {
                 Message = logBuilder.ToString(),
