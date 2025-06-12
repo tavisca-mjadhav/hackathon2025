@@ -13,8 +13,10 @@ namespace Incident_Analyzer_Bff.Services
         private readonly AmazonBedrockRuntimeClient _bedrockClient;
         public BedrockClient()
         {
-            var accessKey = "AKIARIQUO5RSYSKIORML";
-            var secretKey = "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";
+            HttpService httpService = new HttpService(new HttpClient());
+            var credentials= httpService.GetSecrets().GetAwaiter().GetResult();
+            var accessKey = credentials.KeyId;
+            var secretKey = credentials.SecretKey;
             var creds = new BasicAWSCredentials(accessKey, secretKey);
 
             var config = new AmazonBedrockRuntimeConfig
