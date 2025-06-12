@@ -23,6 +23,7 @@ await EnsureLogGroupAndStream(cloudWatchClient, logGroupName, logStreamName);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors(options =>
 {

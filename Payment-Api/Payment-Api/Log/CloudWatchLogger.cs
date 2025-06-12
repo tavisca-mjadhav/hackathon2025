@@ -1,45 +1,53 @@
-﻿using Amazon.CloudWatchLogs.Model;
-using Amazon.CloudWatchLogs;
+﻿using Amazon.CloudWatchLogs;
+using Amazon.CloudWatchLogs.Model;
+using Microsoft.Extensions.Primitives;
 using PaymentApi.Interfaces;
 using System.Text;
+using System.Text.Json;
 
 namespace PaymentApi.Log
 {
-    public class CloudWatchLogger: ICloudWatchLogger
+    public class CloudWatchLogger : ICloudWatchLogger
     {
         private readonly IAmazonCloudWatchLogs _cloudWatchLogs;
         private readonly CloudWatchLogContext _logContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private string _sequenceToken;
 
-        public CloudWatchLogger(IAmazonCloudWatchLogs cloudWatchLogs, CloudWatchLogContext logContext)
+        public CloudWatchLogger(IAmazonCloudWatchLogs cloudWatchLogs, CloudWatchLogContext logContext, IHttpContextAccessor httpContextAccessor)
         {
             _cloudWatchLogs = cloudWatchLogs;
             _logContext = logContext;
+            _httpContextAccessor = httpContextAccessor;
         }
 
-        public async Task LogInfoAsync(string message, Dictionary<string, object> fields = null)
+        public async Task LogInfoAsync(string message, Object data = null)
         {
-            await LogAsync("INFO", message,fields);
+            await LogAsync("INFO", message, JsonSerializer.Serialize(data));
         }
 
-        public async Task LogErrorAsync(string message, Exception ex = null , Dictionary<string, object> fields = null)
+        private string GetCid()
         {
-            var errorMessage = $"{message}{(ex != null ? $"\nException: {ex.Message}\nStackTrace: {ex.StackTrace}" : "")}";
-           
-            await LogAsync("ERROR", errorMessage);
+            var ctx = _httpContextAccessor?.HttpContext;
+            var cid = ctx?.Request?.Headers["cid"].FirstOrDefault();
+            if (cid is null || cid.Equals(StringValues.Empty))
+            {
+                cid = Guid.NewGuid().ToString();
+            }
+            return cid;
         }
 
-        private async Task LogAsync(string level, string message, Dictionary<string, object> fields = null)
+        public async Task LogErrorAsync(string message, Exception ex = null)
+        {
+            var error = $"{JsonSerializer.Serialize(ex)}";
+
+            await LogAsync("ERROR", message, error);
+        }
+
+        private async Task LogAsync(string level, string message, string json)
         {
             var logBuilder = new StringBuilder();
-            logBuilder.Append($"{DateTime.UtcNow:o} [{level}] {message}");
-            if (fields != null)
-            {
-                foreach (var field in fields)
-                {
-                    logBuilder.Append($" | {field.Key}: {field.Value}");
-                }
-            }
+            logBuilder.Append($"CID:{GetCid()}=>{DateTime.UtcNow:o} [level:{level}] [message:{message}] [data:{json}]");
             var logEvent = new InputLogEvent
             {
                 Message = logBuilder.ToString(),
