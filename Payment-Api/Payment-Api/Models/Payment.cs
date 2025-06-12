@@ -7,7 +7,7 @@
         public string PaymentType { get; set; }
         public decimal Amount { get; set; }
         public string Currency { get; set; }
-        public Card Card { get; set; }
+        public Card? Card { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     }
     public class CardExpiry

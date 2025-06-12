@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaymentApi.Controllers
 {
@@ -11,11 +12,13 @@ namespace PaymentApi.Controllers
     {
         private readonly IPaymentService _paymentService;
         private readonly ICloudWatchLogger _logger;
+        private readonly ILogger<PaymentController> _loggerseri;
 
-        public PaymentController(IPaymentService paymentService, ICloudWatchLogger logger)
+        public PaymentController(IPaymentService paymentService, ICloudWatchLogger logger, ILogger<PaymentController> loggerseri)
         {
             _paymentService = paymentService;
             _logger = logger;
+            _loggerseri = loggerseri;
         }
 
         [HttpGet]
@@ -39,11 +42,10 @@ namespace PaymentApi.Controllers
         {
             try
             {
-                await _logger.LogInfoAsync("Payment Api create start", new Dictionary<string, object> { { "CorrelationId", Guid.NewGuid() } });
                 var created = await _paymentService.CreatePaymentAsync(payment);
                 return CreatedAtAction(nameof(Create), new { id = payment.Id.ToString() }, created);
             }
-            catch (ArgumentException ex)
+            catch (ValidationException ex)
             {
                 await _logger.LogErrorAsync("Validation failed.",ex);
                 return BadRequest(ex.Message);

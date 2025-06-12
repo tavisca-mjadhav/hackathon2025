@@ -22,9 +22,9 @@ namespace PaymentApi.Repositories
             return await _context.Payments.ToListAsync();
         }
 
-        public async Task<GetItemResponse> GetByIdAsync(string id)
+        public async Task<GetItemResponse> GetByIdAsync(string orderId)
         {
-            var result = await _amazonClient.GetPayment(id);
+            var result = await _amazonClient.GetPayment(orderId);
             return result;
         }
 

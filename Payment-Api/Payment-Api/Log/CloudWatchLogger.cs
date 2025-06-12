@@ -2,7 +2,6 @@
 using Amazon.CloudWatchLogs.Model;
 using Microsoft.Extensions.Primitives;
 using PaymentApi.Interfaces;
-using PaymentApi.Models;
 using System.Text;
 using System.Text.Json;
 
@@ -40,7 +39,14 @@ namespace PaymentApi.Log
 
         public async Task LogErrorAsync(string message, Exception ex = null)
         {
-            var error = $"{JsonSerializer.Serialize(ex)}";
+            //var error = $"{JsonSerializer.Serialize(ex)}";
+            var error = JsonSerializer.Serialize(new
+            {
+                ExceptionMessage = ex.Message,
+                StackTrace = ex.StackTrace,
+                Source = ex.Source,
+                InnerException = ex.InnerException?.Message
+            });
 
             await LogAsync("ERROR", message, error);
         }
@@ -48,7 +54,7 @@ namespace PaymentApi.Log
         private async Task LogAsync(string level, string message, string json)
         {
             var logBuilder = new StringBuilder();
-            logBuilder.Append($"CID:{GetCid()}=> {DateTime.UtcNow:o}[app:name: payment_api] [level:{level}] [message:{message}] [data:{json}]");
+            logBuilder.Append($"CID:{GetCid()}=> {DateTime.UtcNow:o}[AppName: PaymentAPI] [level:{level}] [message:{message}] [data:{json}]");
             var logEvent = new InputLogEvent
             {
                 Message = logBuilder.ToString(),

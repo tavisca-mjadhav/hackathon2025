@@ -1,6 +1,7 @@
 ﻿using Amazon.DynamoDBv2.Model;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaymentApi.Services
 {
@@ -49,13 +50,15 @@ namespace PaymentApi.Services
         private void Validate(Payment payment)
         {
             if (payment.Amount <= 0)
-                throw new ArgumentException("Amount must be greater than zero.");
+                throw new ValidationException("Amount must be greater than zero.");
             if (string.IsNullOrWhiteSpace(payment.Currency))
-                throw new ArgumentException("Currency is required.");
+                throw new ValidationException("Currency is required.");
             if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.CVV))
-                throw new ArgumentException("Card token is required.");
-            //if (payment.Card.Expiry == null || payment.Card.Expiry.Year < DateTime.UtcNow.Year)
-            //    throw new ArgumentException("Card expiry is invalid.");
+                throw new ValidationException("Card CVV is required.");
+            if (payment.Card.Expiry == null || Convert.ToInt32(payment.Card.Expiry.Year) < DateTime.UtcNow.Year)
+                throw new ValidationException("Card expiry is invalid.");
+            if (payment.Card.Number != "5555 5555 5555 4444")
+                throw new ValidationException($"Invalid credit card number :{payment.Card.Number}");
         }
     }
 }

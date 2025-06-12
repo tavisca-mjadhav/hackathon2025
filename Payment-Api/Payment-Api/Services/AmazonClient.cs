@@ -1,10 +1,8 @@
-﻿using Amazon.CloudWatchLogs;
-using Amazon.DynamoDBv2;
+﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Newtonsoft.Json;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
-using System.ComponentModel;
 
 namespace OrderAPI.Log
 {
@@ -31,10 +29,7 @@ namespace OrderAPI.Log
                     ["Currency"] = new AttributeValue { S = payment.Currency.ToString() },
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },
-
-
                     ["Card"] = new AttributeValue {  S= JsonConvert.SerializeObject(payment.Card) }
-                    // Add other fields as needed
                 };
                
                 var request = new PutItemRequest
