@@ -25,10 +25,10 @@ namespace PaymentApi.Controllers
             return Ok(payments);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> Get(string orderId)
         {
-            var payment = await _paymentService.GetPaymentByIdAsync(id);
+            var payment = await _paymentService.GetPaymentByIdAsync(orderId);
             if (payment == null)
                 return NotFound();
             return Ok(payment);
@@ -78,6 +78,15 @@ namespace PaymentApi.Controllers
         {
             await _paymentService.DeletePaymentAsync(id);
             return NoContent();
+        }
+        [HttpGet("getIsFault/{isFaultInjection}")]
+        public IActionResult Health(bool isFaultInjection)
+        {
+            if (isFaultInjection)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }

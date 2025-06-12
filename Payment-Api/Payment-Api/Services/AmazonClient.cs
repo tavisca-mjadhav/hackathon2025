@@ -53,7 +53,7 @@ namespace OrderAPI.Log
             return null;
         }
 
-        public async Task<GetItemResponse> GetOrder(string orderId)
+        public async Task<GetItemResponse> GetPayment(string orderId)
         {
             try
             {
@@ -74,5 +74,6 @@ namespace OrderAPI.Log
             }
             return null;
         }
+
     }
 }

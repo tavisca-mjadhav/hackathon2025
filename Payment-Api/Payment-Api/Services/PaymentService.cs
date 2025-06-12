@@ -1,4 +1,5 @@
-﻿using PaymentApi.Interfaces;
+﻿using Amazon.DynamoDBv2.Model;
+using PaymentApi.Interfaces;
 using PaymentApi.Models;
 
 namespace PaymentApi.Services
@@ -19,7 +20,7 @@ namespace PaymentApi.Services
             return await _repository.GetAllAsync();
         }
 
-        public async Task<Payment?> GetPaymentByIdAsync(int id)
+        public async Task<GetItemResponse?> GetPaymentByIdAsync(string id)
         {
             return await _repository.GetByIdAsync(id);
         }

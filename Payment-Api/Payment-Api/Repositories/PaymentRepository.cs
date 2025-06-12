@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Amazon.DynamoDBv2.Model;
+using Microsoft.EntityFrameworkCore;
 using OrderAPI.Log;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
@@ -21,9 +22,10 @@ namespace PaymentApi.Repositories
             return await _context.Payments.ToListAsync();
         }
 
-        public async Task<Payment?> GetByIdAsync(int id)
+        public async Task<GetItemResponse> GetByIdAsync(string id)
         {
-            return await _context.Payments.FindAsync(id);
+            var result = await _amazonClient.GetPayment(id);
+            return result;
         }
 
         public async Task<bool> AddAsync(Payment payment)
