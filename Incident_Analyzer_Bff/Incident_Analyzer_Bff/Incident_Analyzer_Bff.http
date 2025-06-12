@@ -1,0 +1,6 @@
+@Incident_Analyzer_Bff_HostAddress = http://localhost:5200
+
+GET {{Incident_Analyzer_Bff_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
