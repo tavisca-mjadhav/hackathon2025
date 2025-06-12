@@ -1,4 +1,5 @@
 using Incident_Analyzer_Bff.Handler;
+using Incident_Analyzer_Bff.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Incident_Analyzer_Bff.Controllers
@@ -15,7 +16,7 @@ namespace Incident_Analyzer_Bff.Controllers
         }
 
         [HttpGet(Name = "GetDetails")]
-        public string Get(string cid)
+        public DetailsModel Get(string cid)
         {
             AnalyzerHandler analyzerHandler = new AnalyzerHandler();
             return analyzerHandler.GetErrorDetails(cid).Result;

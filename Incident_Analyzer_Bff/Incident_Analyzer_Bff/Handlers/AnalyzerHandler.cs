@@ -7,6 +7,7 @@ using Amazon.BedrockRuntime;
 using Amazon;
 using System.Text;
 using Incident_Analyzer_Bff.Services;
+using LLM_app;
 
 
 namespace Incident_Analyzer_Bff.Handler
@@ -14,16 +15,24 @@ namespace Incident_Analyzer_Bff.Handler
     public class AnalyzerHandler
     {
 
-        public async Task<string> GetErrorDetails(string cid)
+        public async Task<DetailsModel> GetErrorDetails(string cid)
         {
-            var prompt = GenerateErrorPrompt(cid);
+            var prompt = await GenerateErrorPrompt(cid);
             var response = await GetDetailsFromBedrock(prompt);
-            return response.ToString(); 
+            return JsonConvert.DeserializeObject<DetailsModel>(response); 
         }
 
 
-        private static string GenerateErrorPrompt(string cid)
-        {
+        private async Task<string> GenerateErrorPrompt(string cid)
+        {  //get context 
+            var accessKey = "AKIARIQUO5RSXXN4J66S";
+            var secretKey = "A6Tj8sxgxITkMEbfvx3va1YbF6XcqcCf2lrSzwa1";
+            string region = "us-east-1"; // Replace with your region
+            string logGroupName = "PaymentApiLogs";
+
+            var cloudwatchService = new CloudWatchService(accessKey, secretKey, region);
+            var context = await cloudwatchService.FetchFilteredLogs(logGroupName, cid);
+
             return $@"
                     You are an intelligent assistant that diagnoses software issues.
 
@@ -38,20 +47,37 @@ namespace Incident_Analyzer_Bff.Handler
                         - Suggested fix
 
                     Output format:
-                    - CID: {cid}
-                    - Error Summary:
-                    - Affected Service/Module:
-                    - Root Cause (if known):
-                    - Suggested Fix/Next Steps:
-
+                    - string CID: {cid}
+                    - string ErrorSummary:
+                    - List<string> AfftectedServivces :
+                    - string ErrorInService :
+                    - string ErrorMessage :
+                    - string RootCause 
+                    - string Solution :
+                    
+                    Here are the CloudWatch logs for the cid = {context}, please analyze them
+                    and provide relevant information.
                     If no information is found, state: 'No relevant error data found for CID: {cid}'.
-
-                    Provide the response in plain English.
+                    
+                    Analyze and fetch all the details required in output.
+                    Provide the response in json which can be deserialized in the output format provided only. 
+                    Json model for output
+                    {{
+                        ""CID"": ""{cid}"",
+                        ""ErrorSummary"": """",
+                        ""AffectedServices"": [],
+                        ""ErrorInService"": """",
+                        ""ErrorMessage"": """",
+                        ""RootCause"": """",
+                        ""Solution"": """"
+                    }}  
+                    Do not add extra spaces and do not beautify the json.
                     ";
         }
 
         private async Task<string> GetDetailsFromBedrock(string prompt)
         {
+          
             var config = new AmazonBedrockConfig
             {
                 RegionEndpoint = Amazon.RegionEndpoint.USWest1, // Specify your region

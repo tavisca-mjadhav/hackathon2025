@@ -13,8 +13,8 @@ namespace Incident_Analyzer_Bff.Services
         private readonly AmazonBedrockRuntimeClient _bedrockClient;
         public BedrockClient()
         {
-            var accessKey = "AKIARIQUO5RSXXN4J66S";
-            var secretKey = "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";
+            var accessKey = "AKIARIQUO5RSYSKIORML";
+            var secretKey = "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";
             var creds = new BasicAWSCredentials(accessKey, secretKey);
 
             var config = new AmazonBedrockRuntimeConfig
@@ -31,7 +31,7 @@ namespace Incident_Analyzer_Bff.Services
             var requestBody = new
             {
                 anthropic_version= "bedrock-2023-05-31",
-                max_tokens = 500,
+                max_tokens = 200000,
                 temperature=0.5,
                 messages = new[]
                 {
@@ -55,7 +55,7 @@ namespace Incident_Analyzer_Bff.Services
                     var chunk = JsonSerializer.Deserialize<JsonObject>((item as PayloadPart).Bytes);
                     var text = chunk["delta"]?["text"]?.ToString();
                     Console.WriteLine(text);
-                    response.AppendLine(text ?? string.Empty);
+                    response.Append(text ?? string.Empty);
                 }
             }
             catch (Exception e)
