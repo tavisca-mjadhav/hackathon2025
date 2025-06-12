@@ -5,6 +5,9 @@ using PaymentApi.Repositories;
 using PaymentApi.Interfaces;
 using Amazon.CloudWatchLogs.Model;
 using PaymentApi.Log;
+using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2;
+using OrderAPI.Log;
 
 var builder = WebApplication.CreateBuilder(args);
 var logGroupName = "PaymentApiLogs";
@@ -19,10 +22,17 @@ var cloudWatchClient = new AmazonCloudWatchLogsClient(
     configuration["AWS:SecretKey"],
     Amazon.RegionEndpoint.GetBySystemName(configuration["AWS:Region"])
 );
+var dynamoDbClient = new AmazonDynamoDBClient(configuration["AWS:AccessKey"], configuration["AWS:SecretKey"], Amazon.RegionEndpoint.USEast1);
+
+// Register services
+builder.Services.AddSingleton<IAmazonDynamoDB>(dynamoDbClient);
+builder.Services.AddSingleton<IDynamoDBContext>(new DynamoDBContext(dynamoDbClient));
+builder.Services.AddSingleton<AmazonClient>();
 await EnsureLogGroupAndStream(cloudWatchClient, logGroupName, logStreamName);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddCors(options =>
 {

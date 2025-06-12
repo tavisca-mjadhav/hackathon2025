@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Amazon.DynamoDBv2.Model;
+using Microsoft.EntityFrameworkCore;
+using OrderAPI.Log;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
 
@@ -7,10 +9,12 @@ namespace PaymentApi.Repositories
     public class PaymentRepository : IPaymentRepository
     {
         private readonly PaymentDbContext _context;
+        private readonly AmazonClient _amazonClient;
 
-        public PaymentRepository(PaymentDbContext context)
+        public PaymentRepository(PaymentDbContext context , AmazonClient amazonClient)
         {
             _context = context;
+            _amazonClient = amazonClient;
         }
 
         public async Task<IEnumerable<Payment>> GetAllAsync()
@@ -18,16 +22,18 @@ namespace PaymentApi.Repositories
             return await _context.Payments.ToListAsync();
         }
 
-        public async Task<Payment?> GetByIdAsync(int id)
+        public async Task<GetItemResponse> GetByIdAsync(string id)
         {
-            return await _context.Payments.FindAsync(id);
+            var result = await _amazonClient.GetPayment(id);
+            return result;
         }
 
-        public async Task<Payment> AddAsync(Payment payment)
+        public async Task<bool> AddAsync(Payment payment)
         {
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-            return payment;
+           var result = await  _amazonClient.PutItem(payment);
+          ///  _context.Payments.Add(payment);
+           // await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task UpdateAsync(Payment payment)

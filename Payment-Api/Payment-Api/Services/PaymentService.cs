@@ -1,4 +1,5 @@
-﻿using PaymentApi.Interfaces;
+﻿using Amazon.DynamoDBv2.Model;
+using PaymentApi.Interfaces;
 using PaymentApi.Models;
 
 namespace PaymentApi.Services
@@ -19,16 +20,16 @@ namespace PaymentApi.Services
             return await _repository.GetAllAsync();
         }
 
-        public async Task<Payment?> GetPaymentByIdAsync(int id)
+        public async Task<GetItemResponse?> GetPaymentByIdAsync(string id)
         {
             return await _repository.GetByIdAsync(id);
         }
 
-        public async Task<Payment> CreatePaymentAsync(Payment payment)
+        public async Task<bool> CreatePaymentAsync(Payment payment)
         {
             Validate(payment);
             var created = await _repository.AddAsync(payment);
-           await _logger.LogInfoAsync($"Created payment with ID: {created.Id}");
+           await _logger.LogInfoAsync($"Created payment with ID: {payment.Id}");
             return created;
         }
 
@@ -53,8 +54,8 @@ namespace PaymentApi.Services
                 throw new ArgumentException("Currency is required.");
             if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.Token))
                 throw new ArgumentException("Card token is required.");
-            if (payment.Card.Expiry == null || payment.Card.Expiry.Year < DateTime.UtcNow.Year)
-                throw new ArgumentException("Card expiry is invalid.");
+            //if (payment.Card.Expiry == null || payment.Card.Expiry.Year < DateTime.UtcNow.Year)
+            //    throw new ArgumentException("Card expiry is invalid.");
         }
     }
 }

@@ -3,7 +3,7 @@
     public class Payment
     {
         public int Id { get; set; }
-        public int OrderId { get; set; }
+        public string OrderId { get; set; }
         public string PaymentStatus { get; set; }
         public string PaymentType { get; set; }
         public decimal Amount { get; set; }
@@ -13,8 +13,8 @@
     }
     public class CardExpiry
     {
-        public int Month { get; set; }
-        public int Year { get; set; }
+        public string Month { get; set; }
+        public string Year { get; set; }
     }
     public class Card
     {

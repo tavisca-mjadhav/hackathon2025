@@ -25,10 +25,10 @@ namespace PaymentApi.Controllers
             return Ok(payments);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(int id)
+        [HttpGet("{orderId}")]
+        public async Task<IActionResult> Get(string orderId)
         {
-            var payment = await _paymentService.GetPaymentByIdAsync(id);
+            var payment = await _paymentService.GetPaymentByIdAsync(orderId);
             if (payment == null)
                 return NotFound();
             return Ok(payment);
@@ -39,14 +39,18 @@ namespace PaymentApi.Controllers
         {
             try
             {
-
                 await _logger.LogInfoAsync("Payment Api create start", new Dictionary<string, object> { { "CorrelationId", Guid.NewGuid() } });
                 var created = await _paymentService.CreatePaymentAsync(payment);
-                return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+                return CreatedAtAction(nameof(Get), new { id = payment.ToString() }, created);
             }
             catch (ArgumentException ex)
             {
                 await _logger.LogErrorAsync("Validation failed.",ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync("Validation failed.", ex);
                 return BadRequest(ex.Message);
             }
         }
@@ -74,6 +78,15 @@ namespace PaymentApi.Controllers
         {
             await _paymentService.DeletePaymentAsync(id);
             return NoContent();
+        }
+        [HttpGet("getIsFault/{isFaultInjection}")]
+        public IActionResult Health(bool isFaultInjection)
+        {
+            if (isFaultInjection)
+            {
+                return BadRequest();
+            }
+            return Ok();
         }
     }
 }
