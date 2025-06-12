@@ -20,4 +20,10 @@
 	<PackageReference Include="AWS.Logger.AspNetCore" Version="3.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
