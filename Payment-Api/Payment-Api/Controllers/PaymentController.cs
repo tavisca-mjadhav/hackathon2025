@@ -39,14 +39,18 @@ namespace PaymentApi.Controllers
         {
             try
             {
-
                 await _logger.LogInfoAsync("Payment Api create start", new Dictionary<string, object> { { "CorrelationId", Guid.NewGuid() } });
                 var created = await _paymentService.CreatePaymentAsync(payment);
-                return CreatedAtAction(nameof(Get), new { id = created.Id }, created);
+                return CreatedAtAction(nameof(Get), new { id = payment.ToString() }, created);
             }
             catch (ArgumentException ex)
             {
                 await _logger.LogErrorAsync("Validation failed.",ex);
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync("Validation failed.", ex);
                 return BadRequest(ex.Message);
             }
         }

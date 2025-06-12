@@ -6,7 +6,7 @@ namespace PaymentApi.Interfaces
     {
         Task<IEnumerable<Payment>> GetAllAsync();
         Task<Payment?> GetByIdAsync(int id);
-        Task<Payment> AddAsync(Payment payment);
+        Task<bool> AddAsync(Payment payment);
         Task UpdateAsync(Payment payment);
         Task DeleteAsync(int id);
     }

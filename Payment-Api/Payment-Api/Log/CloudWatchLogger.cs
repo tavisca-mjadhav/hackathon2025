@@ -2,6 +2,7 @@
 using Amazon.CloudWatchLogs.Model;
 using Microsoft.Extensions.Primitives;
 using PaymentApi.Interfaces;
+using PaymentApi.Models;
 using System.Text;
 using System.Text.Json;
 
@@ -43,7 +44,7 @@ namespace PaymentApi.Log
 
             await LogAsync("ERROR", message, error);
         }
-
+       
         private async Task LogAsync(string level, string message, string json)
         {
             var logBuilder = new StringBuilder();

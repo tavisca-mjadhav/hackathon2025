@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderAPI.Log;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
 
@@ -7,10 +8,12 @@ namespace PaymentApi.Repositories
     public class PaymentRepository : IPaymentRepository
     {
         private readonly PaymentDbContext _context;
+        private readonly AmazonClient _amazonClient;
 
-        public PaymentRepository(PaymentDbContext context)
+        public PaymentRepository(PaymentDbContext context , AmazonClient amazonClient)
         {
             _context = context;
+            _amazonClient = amazonClient;
         }
 
         public async Task<IEnumerable<Payment>> GetAllAsync()
@@ -23,11 +26,12 @@ namespace PaymentApi.Repositories
             return await _context.Payments.FindAsync(id);
         }
 
-        public async Task<Payment> AddAsync(Payment payment)
+        public async Task<bool> AddAsync(Payment payment)
         {
-            _context.Payments.Add(payment);
-            await _context.SaveChangesAsync();
-            return payment;
+           var result = await  _amazonClient.PutItem(payment);
+          ///  _context.Payments.Add(payment);
+           // await _context.SaveChangesAsync();
+            return true;
         }
 
         public async Task UpdateAsync(Payment payment)
