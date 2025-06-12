@@ -52,7 +52,7 @@ namespace PaymentApi.Services
                 throw new ArgumentException("Amount must be greater than zero.");
             if (string.IsNullOrWhiteSpace(payment.Currency))
                 throw new ArgumentException("Currency is required.");
-            if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.Token))
+            if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.CVV))
                 throw new ArgumentException("Card token is required.");
             //if (payment.Card.Expiry == null || payment.Card.Expiry.Year < DateTime.UtcNow.Year)
             //    throw new ArgumentException("Card expiry is invalid.");

@@ -2,9 +2,8 @@
 {
     public class Payment
     {
-        public int Id { get; set; }
+        public string? Id { get; set; }=Guid.NewGuid().ToString();
         public string OrderId { get; set; }
-        public string PaymentStatus { get; set; }
         public string PaymentType { get; set; }
         public decimal Amount { get; set; }
         public string Currency { get; set; }
@@ -18,7 +17,7 @@
     }
     public class Card
     {
-        public string Token { get; set; }
+        public string CVV { get; set; }
         public string Number { get; set; }
         public string IssuedBy { get; set; }
         public string HolderName { get; set; }

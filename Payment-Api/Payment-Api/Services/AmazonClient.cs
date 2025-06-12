@@ -24,8 +24,7 @@ namespace OrderAPI.Log
                 var item = new Dictionary<string, AttributeValue>
                 {
                     ["OrderId"] = new AttributeValue { S = payment.OrderId },
-                    ["Id"] = new AttributeValue { S = payment.Id.ToString() },
-                    ["PaymentStatus"] = new AttributeValue { S = payment.PaymentStatus.ToString() },
+                    ["Id"] = new AttributeValue { S = payment.Id },
                     ["PaymentType"] = new AttributeValue { S = payment.PaymentType.ToString() },
                  
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },

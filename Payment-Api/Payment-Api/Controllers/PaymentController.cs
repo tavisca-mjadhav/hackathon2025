@@ -50,24 +50,7 @@ namespace PaymentApi.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Payment payment)
-        {
-            if (id != payment.Id)
-                return BadRequest("ID mismatch");
-
-            try
-            {
-                await _paymentService.UpdatePaymentAsync(payment);
-                return NoContent();
-            }
-            catch (ArgumentException ex)
-            {
-               await _logger.LogErrorAsync("Validation failed.",ex);
-                return BadRequest(ex.Message);
-            }
-        }
-
+       
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
