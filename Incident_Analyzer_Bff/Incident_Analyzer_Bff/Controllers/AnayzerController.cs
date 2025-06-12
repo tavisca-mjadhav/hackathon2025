@@ -5,11 +5,11 @@ namespace Incident_Analyzer_Bff.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AnayzerController : ControllerBase
+    public class AnalyzerController : ControllerBase
     {
-        private readonly ILogger<AnayzerController> _logger;
+        private readonly ILogger<AnalyzerController> _logger;
 
-        public AnayzerController(ILogger<AnayzerController> logger)
+        public AnalyzerController(ILogger<AnalyzerController> logger)
         {
             _logger = logger;
         }
