@@ -50,6 +50,11 @@ namespace PaymentApi.Controllers
                 await _logger.LogErrorAsync("Validation failed.",ex);
                 return BadRequest(ex.Message);
             }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync("Intternal Server Error.", ex);
+                return StatusCode(500, new { Error = ex.Message });
+            }
         }
 
        

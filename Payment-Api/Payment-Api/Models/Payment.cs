@@ -1,4 +1,6 @@
-﻿namespace PaymentApi.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PaymentApi.Models
 {
     public class Payment
     {
@@ -18,9 +20,16 @@
     public class Card
     {
         public string CVV { get; set; }
+
+        [StringLength(15,MinimumLength =5)]
         public string Number { get; set; }
         public string IssuedBy { get; set; }
         public string HolderName { get; set; }
         public CardExpiry Expiry { get; set; }
+    }
+    public enum  PaymentType
+    {
+        Cash,
+        Card
     }
 }
