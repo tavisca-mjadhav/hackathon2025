@@ -41,7 +41,7 @@ public class OrderService : IOrderService
             if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
             {
                 //payment call
-                var paymentRequest = GetPaymentRequest(order);
+                var paymentRequest = GetPaymentRequest(order, orderRequest);
                 var status = await _paymentService.ProcessPaymentAsync(paymentRequest);
                 order.PaymentStatus = status ? PaymentStatus.FullyPaid.ToString() : PaymentStatus.Failed.ToString(); 
                 response = await _amazonClient.PutItem(order);
@@ -61,7 +61,7 @@ public class OrderService : IOrderService
 
     }
 
-    private static PaymentRequest GetPaymentRequest(Order order)
+    private static PaymentRequest GetPaymentRequest(Order order, OrderRequest orderRequest)
     {
         return new PaymentRequest
         {
@@ -71,10 +71,10 @@ public class OrderService : IOrderService
             PaymentId = CommonUtils.GenerateRandomAlphanumeric(),
             Card = new Card
             {
-                CardNumber = "4111111111111111", // Example card number
-                CVV = "123", // Example CVV
-                ExpiryDate = "12/25", // Example expiry date
-                NameOnCard = "John Doe" // Example name on card
+                Number = orderRequest.Card.Number, // Example card number
+                CVV = orderRequest.Card.CVV, // Example CVV
+                Expiry = new CardExpiry() { Month = orderRequest.Card.Expiry.Month, Year = orderRequest.Card.Expiry.Year }, // Example expiry date
+                HolderName = orderRequest.Card.HolderName // Example name on card
             }
 
         };
