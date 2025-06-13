@@ -1,76 +1,54 @@
-
-using Amazon.DynamoDBv2;
-using Amazon.DynamoDBv2.DocumentModel;
-using Amazon.CloudWatchLogs;
-using Amazon.CloudWatchLogs.Model;
-using Newtonsoft.Json;
+using OrderAPI.Log;
 using OrderAPI.Models;
-
+using System.Text.Json;
 
 public class PaymentService : IPaymentService
 {
-    private readonly IAmazonCloudWatchLogs _cloudWatchLogs;
+    private readonly CloudWatchLogger _cloudWatchLogs;
     private readonly HttpClient _httpClient;
-    public PaymentService(IAmazonCloudWatchLogs cloudWatchLogs)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    public PaymentService(CloudWatchLogger cloudWatchLogs, HttpClient httpClient, IHttpContextAccessor httpContextAccessor)
     {
         _cloudWatchLogs = cloudWatchLogs;
+        _httpClient = httpClient;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     public async Task<bool> ProcessPaymentAsync(PaymentRequest request)
     {
-        var apiUrl = "https://external-payment-api.com/process";
+        // var apiUrl = "http://ec2-54-84-244-6.compute-1.amazonaws.com:8081/api/payment";
+        var apiUrl = "https://localhost:7197/api/payment";
+        var uri = new Uri(apiUrl);
+        HttpContent rContent = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, "application/json");
+        var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)
+        {
+            Content = rContent
+        };
+        string cid = _httpContextAccessor.HttpContext?.Request?.Headers["cid"].FirstOrDefault();
+        if (!string.IsNullOrEmpty(cid))
+        {
+            requestMessage.Headers.Add("cid", cid);
+        }
 
         try
         {
-            var response = await _httpClient.PostAsJsonAsync(apiUrl, request);
-            response.EnsureSuccessStatusCode();
+            var response = await _httpClient.SendAsync(requestMessage);
+            // response.EnsureSuccessStatusCode();
 
             // Optionally read response content
             var content = await response.Content.ReadAsStringAsync();
-
-            return true;
+            if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                return bool.Parse(content);
+            }
+            var result = JsonSerializer.Deserialize<Error>(content);
+            throw result;
         }
         catch (Exception ex)
         {
-            LogExceptionToCloudWatch(request.OrderId, ex);
+            await _cloudWatchLogs.LogErrorAsync("Error", ex);
             return false;
         }
     }
-
-    private async Task LogExceptionToCloudWatch(string orderId, Exception ex)
-    {
-        string logGroup = "PaymentErrors";
-        string logStream = "ProcessPaymentErrors";
-
-        try
-        {
-            await _cloudWatchLogs.CreateLogGroupAsync(new CreateLogGroupRequest { LogGroupName = logGroup });
-        }
-        catch (ResourceAlreadyExistsException) { }
-
-        try
-        {
-            await _cloudWatchLogs.CreateLogStreamAsync(new CreateLogStreamRequest
-            {
-                LogGroupName = logGroup,
-                LogStreamName = logStream
-            });
-        }
-        catch (ResourceAlreadyExistsException) { }
-
-        var logEvent = new InputLogEvent
-        {
-            Message = $"[{DateTime.UtcNow}] Error processing paynment for OrderId {orderId}: {ex}",
-            Timestamp = DateTime.UtcNow
-        };
-
-        await _cloudWatchLogs.PutLogEventsAsync(new PutLogEventsRequest
-        {
-            LogGroupName = logGroup,
-            LogStreamName = logStream,
-            LogEvents = new List<InputLogEvent> { logEvent }
-        });
-    }
-
 
 }
