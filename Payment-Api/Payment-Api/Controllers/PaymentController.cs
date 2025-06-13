@@ -53,7 +53,6 @@ namespace PaymentApi.Controllers
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync("Intternal Server Error.", ex);
-
                 return StatusCode(500, new { Error = ex.Message });
             }
         }

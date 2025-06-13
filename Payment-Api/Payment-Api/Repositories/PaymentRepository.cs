@@ -31,6 +31,8 @@ namespace PaymentApi.Repositories
         public async Task<bool> AddAsync(Payment payment)
         {
            var result = await  _amazonClient.PutItem(payment);
+            if(result== null) 
+                return false;
           ///  _context.Payments.Add(payment);
            // await _context.SaveChangesAsync();
             return true;

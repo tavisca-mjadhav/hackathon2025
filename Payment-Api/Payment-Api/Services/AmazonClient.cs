@@ -10,15 +10,19 @@ namespace OrderAPI.Log
     {
         private readonly IAmazonDynamoDB _dynamoDB;
         private readonly ICloudWatchLogger _cloudWatchLogs;
-        public AmazonClient(IAmazonDynamoDB dynamoDB)
+        public AmazonClient(IAmazonDynamoDB dynamoDB, ICloudWatchLogger cloudWatchLogger)
         {
             _dynamoDB = dynamoDB;
+            _cloudWatchLogs = cloudWatchLogger;
         }
 
         public async Task<PutItemResponse> PutItem(Payment payment)
         {
             try
             {
+                if(payment.Currency.ToLower() =="mxn")
+                    throw new ProvisionedThroughputExceededException("DynamoDB write throttle.");
+
                 var item = new Dictionary<string, AttributeValue>
                 {
                     ["OrderId"] = new AttributeValue { S = payment.OrderId },
@@ -31,6 +35,7 @@ namespace OrderAPI.Log
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },
                     ["Card"] = new AttributeValue {  S= JsonConvert.SerializeObject(payment.Card) }
                 };
+
                
                 var request = new PutItemRequest
                 {
