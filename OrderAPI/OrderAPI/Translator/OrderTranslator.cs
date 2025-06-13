@@ -11,7 +11,7 @@ namespace OrderAPI.Translator
             var order = new Order();
             order.OrderId = CommonUtils.GenerateRandomAlphanumeric();
             order.Price = request.Price;
-            order.OrderStatus = Status.Complated.ToString();
+            order.OrderStatus = Status.Completed.ToString();
             order.CustomerName = request.CustomerName;
             order.Items = request.Items.ToItem();
             order.LastUpdatedOn = DateTime.Now;
@@ -25,7 +25,7 @@ namespace OrderAPI.Translator
                 ProductName = itemRequest.ProductName,
                 ProductType = itemRequest.ProductType,
                 ItemPrice = itemRequest.ItemPrice,
-                ItemStatus = Status.Complated.ToString() // Assuming a default status for items
+                ItemStatus = Status.Completed.ToString() // Assuming a default status for items
             }).ToList();
         }
     }

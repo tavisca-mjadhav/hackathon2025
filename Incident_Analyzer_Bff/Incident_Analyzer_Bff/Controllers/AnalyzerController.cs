@@ -21,5 +21,12 @@ namespace Incident_Analyzer_Bff.Controllers
             AnalyzerHandler analyzerHandler = new AnalyzerHandler();
             return analyzerHandler.GetErrorDetails(cid).Result;
         }
+
+        //[HttpGet(Name = "Converse")]
+        //public string Converse(string cid = default, string prompt = default)
+        //{
+        //    AnalyzerHandler analyzerHandler = new AnalyzerHandler();
+        //    return analyzerHandler.ConverseWithBedrock(cid, prompt).Result;
+        //}
     }
 }

@@ -10,6 +10,7 @@ using OrderAPI.Common;
 using OrderAPI.Log;
 using Amazon.DynamoDBv2.DataModel;
 using Amazon.DynamoDBv2.Model;
+using OrderAPI.Services;
 
 
 public class OrderService : IOrderService
@@ -17,14 +18,15 @@ public class OrderService : IOrderService
     private readonly CloudWatchLogger _cloudWatchLogs;
     private readonly IPaymentService _paymentService;
     private readonly AmazonClient _amazonClient;
+    private readonly IFraudCheck _fraudCheck;
 
-    public OrderService(AmazonClient amazonClient, CloudWatchLogger cloudWatchLogs, IPaymentService paymentService)
+
+    public OrderService(AmazonClient amazonClient, CloudWatchLogger cloudWatchLogs, IPaymentService paymentService, IFraudCheck fraudCheck)
     {
-        //_context = context;
         _amazonClient = amazonClient;
         _cloudWatchLogs = cloudWatchLogs;
         _paymentService = paymentService;
-
+        _fraudCheck = fraudCheck;
     }
 
     public async Task<Order> CreateOrderAsync(OrderRequest orderRequest)
@@ -33,25 +35,31 @@ public class OrderService : IOrderService
         var order = new Order();
         try
         {
+            await _cloudWatchLogs.LogInfoAsync($"started Order api", orderRequest);
             //var table = Table.LoadTable(_dynamoDb, "nextgen_order");
-            order = orderRequest.ToOrder();
-            var response = await _amazonClient.PutItem(order);
-
-
-            if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+            var request = new FraudCheckRequest { Amount = orderRequest.Price, CardNumber = orderRequest.Card.Number, IPAddress = "123.2356" };
+            var fraudCheckResult = await _fraudCheck.Check(request);
+            if (!fraudCheckResult.isFraud)
             {
-                //payment call
-                var paymentRequest = GetPaymentRequest(order);
-                var status = await _paymentService.ProcessPaymentAsync(paymentRequest);
-                order.PaymentStatus = status ? PaymentStatus.FullyPaid.ToString() : PaymentStatus.Failed.ToString(); 
-                response = await _amazonClient.PutItem(order);
-            }
-            // Update item in DynamoDB with new status
-            //doc = Document.FromJson(JsonConvert.SerializeObject(order));
-            //await table.PutItemAsync(doc);  // This replaces the existing item
+                order = orderRequest.ToOrder();
+                var response = await _amazonClient.PutItem(order);
 
-            await _cloudWatchLogs.LogInfoAsync($"Order saved successfully with ID {order.OrderId}");
-            return order;
+
+                if (response.HttpStatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    //payment call
+                    var paymentRequest = GetPaymentRequest(order, orderRequest);
+                    var status = await _paymentService.ProcessPaymentAsync(paymentRequest);
+                    order.PaymentStatus = status ? PaymentStatus.FullyPaid.ToString() : PaymentStatus.Failed.ToString();
+                    response = await _amazonClient.PutItem(order);
+                }
+                // Update item in DynamoDB with new status
+                //doc = Document.FromJson(JsonConvert.SerializeObject(order));
+                //await table.PutItemAsync(doc);  // This replaces the existing item
+
+                await _cloudWatchLogs.LogInfoAsync($"Order saved successfully with ID {order.OrderId}");
+                return order;
+            }
         }
         catch (Exception ex)
         {
@@ -61,7 +69,7 @@ public class OrderService : IOrderService
 
     }
 
-    private static PaymentRequest GetPaymentRequest(Order order)
+    private static PaymentRequest GetPaymentRequest(Order order, OrderRequest orderRequest)
     {
         return new PaymentRequest
         {
@@ -69,12 +77,14 @@ public class OrderService : IOrderService
             Amount = order.Price,
             Currency = "USD",
             PaymentId = CommonUtils.GenerateRandomAlphanumeric(),
+            PaymentType = "Card",
             Card = new Card
             {
-                CardNumber = "4111111111111111", // Example card number
-                CVV = "123", // Example CVV
-                ExpiryDate = "12/25", // Example expiry date
-                NameOnCard = "John Doe" // Example name on card
+                Number = orderRequest.Card.Number, // Example card number
+                CVV = orderRequest.Card.CVV, // Example CVV
+                Expiry = new CardExpiry() { Month = orderRequest.Card.Expiry.Month, Year = orderRequest.Card.Expiry.Year }, // Example expiry date
+                HolderName = orderRequest.Card.HolderName ,// Example name on card
+                IssuedBy = orderRequest.Card.IssuedBy
             }
 
         };
