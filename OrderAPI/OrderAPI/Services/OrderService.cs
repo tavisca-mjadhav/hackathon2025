@@ -35,10 +35,11 @@ public class OrderService : IOrderService
         var order = new Order();
         try
         {
+            await _cloudWatchLogs.LogInfoAsync($"started Order api", orderRequest);
             //var table = Table.LoadTable(_dynamoDb, "nextgen_order");
             var request = new FraudCheckRequest { Amount = orderRequest.Price, CardNumber = orderRequest.Card.Number, IPAddress = "123.2356" };
             var fraudCheckResult = await _fraudCheck.Check(request);
-            if (fraudCheckResult.isFraud)
+            if (!fraudCheckResult.isFraud)
             {
                 order = orderRequest.ToOrder();
                 var response = await _amazonClient.PutItem(order);
@@ -76,12 +77,14 @@ public class OrderService : IOrderService
             Amount = order.Price,
             Currency = "USD",
             PaymentId = CommonUtils.GenerateRandomAlphanumeric(),
+            PaymentType = "Card",
             Card = new Card
             {
                 Number = orderRequest.Card.Number, // Example card number
                 CVV = orderRequest.Card.CVV, // Example CVV
                 Expiry = new CardExpiry() { Month = orderRequest.Card.Expiry.Month, Year = orderRequest.Card.Expiry.Year }, // Example expiry date
-                HolderName = orderRequest.Card.HolderName // Example name on card
+                HolderName = orderRequest.Card.HolderName ,// Example name on card
+                IssuedBy = orderRequest.Card.IssuedBy
             }
 
         };

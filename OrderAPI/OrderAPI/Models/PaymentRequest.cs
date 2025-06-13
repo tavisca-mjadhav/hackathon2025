@@ -9,6 +9,7 @@ namespace OrderAPI.Models
         public string Currency { get; set; }
         public string OrderId { get; set; }
         public Card Card { get; set; }
+        public string PaymentType { get; set; }
     }
 
     public class CardExpiry

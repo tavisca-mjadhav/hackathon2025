@@ -18,7 +18,7 @@ namespace OrderAPI.Services
 
         public async Task<FraudCheckResponse> Check(FraudCheckRequest request)
         {
-            var apiUrl = $"https://localhost:7217/api/Fraud/check";
+            var apiUrl = $"http://54.175.51.17:8080/api/Fraud/check";
             var uri = new Uri(apiUrl);
             HttpContent rContent = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, "application/json");
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)

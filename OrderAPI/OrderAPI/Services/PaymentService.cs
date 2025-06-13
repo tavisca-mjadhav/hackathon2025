@@ -16,8 +16,7 @@ public class PaymentService : IPaymentService
 
     public async Task<bool> ProcessPaymentAsync(PaymentRequest request)
     {
-        // var apiUrl = "http://ec2-54-84-244-6.compute-1.amazonaws.com:8081/api/payment";
-        var apiUrl = "https://localhost:7197/api/payment";
+        var apiUrl = "http://54.84.244.6:8081/api/payment";
         var uri = new Uri(apiUrl);
         HttpContent rContent = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, "application/json");
         var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)
