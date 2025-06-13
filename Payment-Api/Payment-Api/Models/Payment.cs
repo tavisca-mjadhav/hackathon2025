@@ -23,4 +23,9 @@
         public string HolderName { get; set; }
         public CardExpiry Expiry { get; set; }
     }
+    public enum  PaymentType
+    {
+        Cash,
+        Card
+    }
 }

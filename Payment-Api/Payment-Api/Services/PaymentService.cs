@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.Model;
+using Azure.Core;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
 using System.ComponentModel.DataAnnotations;
@@ -29,6 +30,10 @@ namespace PaymentApi.Services
         public async Task<bool> CreatePaymentAsync(Payment payment)
         {
             Validate(payment);
+            if (!Enum.IsDefined(typeof(PaymentType), payment.PaymentType))
+            {
+                throw new ArgumentOutOfRangeException(nameof(payment.PaymentType), "Invalid Paymemt Type.");
+            }
             var created = await _repository.AddAsync(payment);
            await _logger.LogInfoAsync($"Created payment with ID: {payment.Id}");
             return created;
@@ -56,9 +61,8 @@ namespace PaymentApi.Services
             if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.CVV))
                 throw new ValidationException("Card CVV is required.");
             if (payment.Card.Expiry == null || Convert.ToInt32(payment.Card.Expiry.Year) < DateTime.UtcNow.Year)
-                throw new ValidationException("Card expiry is invalid.");
-            if (payment.Card.Number != "5555 5555 5555 4444")
-                throw new ValidationException($"Invalid credit card number :{payment.Card.Number}");
+                throw new ValidationException("Card Expired.");
+            
         }
     }
 }
