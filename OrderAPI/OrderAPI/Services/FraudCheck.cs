@@ -16,6 +16,42 @@ namespace OrderAPI.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        public async Task<FraudCheckResponse> Check(FraudCheckRequest request)
+        {
+            var apiUrl = $"https://localhost:7217/api/Fraud/check";
+            var uri = new Uri(apiUrl);
+            HttpContent rContent = new StringContent(JsonSerializer.Serialize(request), System.Text.Encoding.UTF8, "application/json");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = rContent
+            };
+            string cid = _httpContextAccessor.HttpContext?.Request?.Headers["cid"].FirstOrDefault();
+            if (!string.IsNullOrEmpty(cid))
+            {
+                requestMessage.Headers.Add("cid", cid);
+            }
+
+            try
+            {
+                var response = await _httpClient.SendAsync(requestMessage);
+                // response.EnsureSuccessStatusCode();
+
+                // Optionally read response content
+                var content = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<FraudCheckResponse>(content, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = false
+                });
+                return result;
+            }
+            catch (Exception ex)
+            {
+                await _cloudWatchLogs.LogErrorAsync("Error", ex);
+                //return false;
+            }
+            return null;
+        }
+
         public async Task<bool> HealthCheck(bool isFaultInjection)
         {
             var apiUrl = $"https://localhost:7217/api/Fraud/getIsFault/{isFaultInjection}";
