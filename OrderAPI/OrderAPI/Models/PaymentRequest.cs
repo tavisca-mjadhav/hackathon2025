@@ -1,4 +1,6 @@
-﻿namespace OrderAPI.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OrderAPI.Models
 {
     public class PaymentRequest
     {
@@ -7,13 +9,21 @@
         public string Currency { get; set; }
         public string OrderId { get; set; }
         public Card Card { get; set; }
+        public string PaymentType { get; set; }
     }
 
+    public class CardExpiry
+    {
+        public string Month { get; set; }
+        public string Year { get; set; }
+    }
     public class Card
     {
-        public string NameOnCard { get; set; }
-        public string CardNumber { get; set; }
-        public string ExpiryDate { get; set; }
         public string CVV { get; set; }
+
+        public string Number { get; set; }
+        public string IssuedBy { get; set; }
+        public string HolderName { get; set; }
+        public CardExpiry Expiry { get; set; }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Amazon.DynamoDBv2.Model;
+using Azure.Core;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace PaymentApi.Services
 {
@@ -28,6 +30,10 @@ namespace PaymentApi.Services
         public async Task<bool> CreatePaymentAsync(Payment payment)
         {
             Validate(payment);
+            if (!Enum.IsDefined(typeof(PaymentType), payment.PaymentType))
+            {
+                throw new ArgumentOutOfRangeException(nameof(payment.PaymentType), "Invalid Paymemt Type.");
+            }
             var created = await _repository.AddAsync(payment);
            await _logger.LogInfoAsync($"Created payment with ID: {payment.Id}");
             return created;
@@ -49,13 +55,14 @@ namespace PaymentApi.Services
         private void Validate(Payment payment)
         {
             if (payment.Amount <= 0)
-                throw new ArgumentException("Amount must be greater than zero.");
+                throw new ValidationException("Amount must be greater than zero.");
             if (string.IsNullOrWhiteSpace(payment.Currency))
-                throw new ArgumentException("Currency is required.");
+                throw new ValidationException("Currency is required.");
             if (payment.Card == null || string.IsNullOrWhiteSpace(payment.Card.CVV))
-                throw new ArgumentException("Card token is required.");
-            //if (payment.Card.Expiry == null || payment.Card.Expiry.Year < DateTime.UtcNow.Year)
-            //    throw new ArgumentException("Card expiry is invalid.");
+                throw new ValidationException("Card CVV is required.");
+            if (payment.Card.Expiry == null || Convert.ToInt32(payment.Card.Expiry.Year) < DateTime.UtcNow.Year)
+                throw new ValidationException("Card Expired.");
+            
         }
     }
 }

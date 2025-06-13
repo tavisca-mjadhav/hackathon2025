@@ -1,10 +1,8 @@
-﻿using Amazon.CloudWatchLogs;
-using Amazon.DynamoDBv2;
+﻿using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.Model;
 using Newtonsoft.Json;
 using PaymentApi.Interfaces;
 using PaymentApi.Models;
-using System.ComponentModel;
 
 namespace OrderAPI.Log
 {
@@ -12,15 +10,19 @@ namespace OrderAPI.Log
     {
         private readonly IAmazonDynamoDB _dynamoDB;
         private readonly ICloudWatchLogger _cloudWatchLogs;
-        public AmazonClient(IAmazonDynamoDB dynamoDB)
+        public AmazonClient(IAmazonDynamoDB dynamoDB, ICloudWatchLogger cloudWatchLogger)
         {
             _dynamoDB = dynamoDB;
+            _cloudWatchLogs = cloudWatchLogger;
         }
 
         public async Task<PutItemResponse> PutItem(Payment payment)
         {
             try
             {
+                if(payment.Currency.ToLower() =="mxn")
+                    throw new ProvisionedThroughputExceededException("DynamoDB write throttle.");
+
                 var item = new Dictionary<string, AttributeValue>
                 {
                     ["OrderId"] = new AttributeValue { S = payment.OrderId },
@@ -31,11 +33,9 @@ namespace OrderAPI.Log
                     ["Currency"] = new AttributeValue { S = payment.Currency.ToString() },
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },
                     ["Amount"] = new AttributeValue { S = payment.Amount.ToString() },
-
-
                     ["Card"] = new AttributeValue {  S= JsonConvert.SerializeObject(payment.Card) }
-                    // Add other fields as needed
                 };
+
                
                 var request = new PutItemRequest
                 {

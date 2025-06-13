@@ -1,13 +1,12 @@
-﻿using Amazon.CloudWatchLogs;
-using Amazon.CloudWatchLogs.Model;
-using Microsoft.Extensions.Primitives;
-using PaymentApi.Interfaces;
+﻿using Amazon.CloudWatchLogs.Model;
+using Amazon.CloudWatchLogs;
 using System.Text;
+using Microsoft.Extensions.Primitives;
 using System.Text.Json;
 
-namespace PaymentApi.Log
+namespace OrderAPI.Log
 {
-    public class CloudWatchLogger : ICloudWatchLogger
+    public class CloudWatchLogger 
     {
         private readonly IAmazonCloudWatchLogs _cloudWatchLogs;
         private readonly CloudWatchLogContext _logContext;
@@ -39,22 +38,24 @@ namespace PaymentApi.Log
 
         public async Task LogErrorAsync(string message, Exception ex = null)
         {
-            //var error = $"{JsonSerializer.Serialize(ex)}";
-            var error = JsonSerializer.Serialize(new
+            try
             {
-                ExceptionMessage = ex.Message,
-                StackTrace = ex.StackTrace,
-                Source = ex.Source,
-                InnerException = ex.InnerException?.Message
-            });
+                var test = new { ex.Message, ex.StackTrace };
+                var error = JsonSerializer.Serialize(test);
+                await LogAsync("ERROR", message, error);
+            }
+            catch (Exception)
+            {
 
-            await LogAsync("ERROR", message, error);
+                throw;
+            }
+           
         }
-       
+
         private async Task LogAsync(string level, string message, string json)
         {
             var logBuilder = new StringBuilder();
-            logBuilder.Append($"CID:{GetCid()}=> {DateTime.UtcNow:o}[AppName: PaymentAPI] [level:{level}] [message:{message}] [data:{json}]");
+            logBuilder.Append($"CID:{GetCid()}=>{DateTime.UtcNow:o} [appName:OrderAPI] level:{level}] [message:{message}] [data:{json}]");
             var logEvent = new InputLogEvent
             {
                 Message = logBuilder.ToString(),
@@ -86,7 +87,6 @@ namespace PaymentApi.Log
             }
         }
     }
-
 }
 
 
